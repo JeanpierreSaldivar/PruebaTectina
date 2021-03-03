@@ -1,0 +1,58 @@
+CREATE TABLE TAREAS (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  titulo TEXT NOT NULL,
+  descripcion TEXT NOT NULL,
+  creacion TEXT NOT NULL,
+  finalizacion TEXT NOT NULL,
+  estado INTEGER  NOT NULL
+);
+
+CREATE TABLE COMENTARIOS(
+    idComentario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    idTarea INTEGER NOT NULL,
+    user TEXT NOT NULL,
+    comentario TEXT NOT NULL
+);
+
+consultarUltimaTarea:
+SELECT * FROM TAREAS WHERE id = (SELECT MAX(id) FROM TAREAS) LIMIT 1;
+
+insertTarea:
+INSERT INTO TAREAS(
+    id,
+    titulo,
+    descripcion,
+    creacion,
+    finalizacion,
+    estado
+)VALUES(?,?,?,?,?,?);
+
+deleteTarea:
+DELETE FROM TAREAS WHERE id =?;
+
+getAllTareas:
+SELECT * FROM TAREAS WHERE estado = ?;
+
+updateEstado:
+UPDATE TAREAS SET estado = ? WHERE  id = ?;
+
+consultarTarea:
+SELECT * FROM TAREAS WHERE id = ? LIMIT 1;
+
+actualizarTarea:
+UPDATE TAREAS SET titulo = ?, descripcion = ?,finalizacion = ? WHERE id = ?;
+
+insertComentario:
+INSERT INTO COMENTARIOS(
+    idComentario,
+    idTarea,
+    user,
+    comentario
+)VALUES(?,?,?,?);
+
+getAllComentarios:
+SELECT * FROM COMENTARIOS WHERE idTarea = ?;
+
+eliminarComentarios:
+DELETE FROM COMENTARIOS WHERE idTarea = ?;
+
