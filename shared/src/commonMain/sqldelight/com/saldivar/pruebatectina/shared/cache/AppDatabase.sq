@@ -12,13 +12,12 @@ SELECT * FROM TAREAS WHERE id = (SELECT MAX(id) FROM TAREAS) LIMIT 1;
 
 insertTarea:
 INSERT INTO TAREAS(
-    id,
     titulo,
     descripcion,
     creacion,
     finalizacion,
     estado
-)VALUES(?,?,?,?,?,?);
+)VALUES(?,?,?,?,?);
 
 deleteTarea:
 DELETE FROM TAREAS WHERE id =?;
@@ -36,7 +35,7 @@ actualizarTarea:
 UPDATE TAREAS SET titulo = ?, descripcion = ?,finalizacion = ? WHERE id = ?;
 
 CREATE TABLE COMENTARIOS(
-    idComentario INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
+    idComentario INTEGER AS Int NOT NULL  PRIMARY KEY AUTOINCREMENT,
     idTarea INTEGER AS Int NOT NULL,
     user TEXT NOT NULL,
     comentario TEXT NOT NULL
@@ -44,11 +43,10 @@ CREATE TABLE COMENTARIOS(
 
 insertComentario:
 INSERT INTO COMENTARIOS(
-    idComentario,
     idTarea,
     user,
     comentario
-)VALUES(?,?,?,?);
+)VALUES(?,?,?);
 
 getAllComentarios:
 SELECT * FROM COMENTARIOS WHERE idTarea = ?;

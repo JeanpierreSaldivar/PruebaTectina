@@ -1,4 +1,5 @@
 buildscript {
+    val kotlin_version by extra("1.4.31")
     repositories {
         gradlePluginPortal()
         jcenter()
@@ -19,5 +20,6 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven("https://dl.bintray.com/badoo/maven")
     }
 }

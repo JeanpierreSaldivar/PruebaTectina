@@ -1,13 +1,13 @@
 package com.saldivar.pruebatectina.shared.cache
 
-import Tareas
+import com.saldivar.pruebatectina.shared.modulos.home.objeto.Tareas
 import com.saldivar.pruebatectina.shared.DatabaseDriverFactory
 
-internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
+internal class ModelTareas(databaseDriverFactory: DatabaseDriverFactory) {
     private val database = AppDatabase(databaseDriverFactory.createDriver())
     private val dbQuery = database.appDatabaseQueries
 
-    fun consultarListaTareas(estadoTarea:Boolean):List<Tareas>{
+    internal fun consultarListaTareas(estadoTarea:Boolean):MutableList<Tareas>{
         val tareaDevolver = mutableListOf<Tareas>()
         val tareas =dbQuery.getAllTareas(estadoTarea).executeAsList()
         for (item in tareas){
@@ -17,10 +17,9 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
             }
         }
         return tareaDevolver
-
     }
 
-    fun consultarEstadoTarea(idTarea: Int):Tareas{
+    internal fun consultarEstadoTarea(idTarea: Int): Tareas {
         val tarea = dbQuery.consultarTarea(idTarea).executeAsOne()
         val objectTarea = Tareas()
         objectTarea.apply {
@@ -31,20 +30,19 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
             finalizacion = tarea.finalizacion
             estado = tarea.estado
         }
-
         return objectTarea
     }
 
-    fun updateEstado(valorActualizar:Boolean,tarea:Tareas){
+    internal fun updateEstado(valorActualizar:Boolean,tarea: Tareas){
         dbQuery.updateEstado(valorActualizar,tarea.id!!)
     }
 
-     fun insertarNuevaTarea(nuevaTarea:Tareas){
-         dbQuery.insertTarea(nuevaTarea.id,nuevaTarea.titulo!!,nuevaTarea.descripcion!!,
+    internal fun insertarNuevaTarea(nuevaTarea: Tareas){
+         dbQuery.insertTarea(nuevaTarea.titulo!!,nuevaTarea.descripcion!!,
          nuevaTarea.creacion!!,nuevaTarea.finalizacion!!,nuevaTarea.estado!!)
      }
 
-    fun consultarUltimaTareaInsertada():Tareas{
+    internal fun consultarUltimaTareaInsertada(): Tareas {
         val tarea = dbQuery.consultarUltimaTarea().executeAsOne()
         val objectTarea = Tareas()
         objectTarea.apply {
@@ -57,4 +55,9 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
         }
         return objectTarea
     }
+
+    internal fun eliminarTarea(idTarea:Int){
+        dbQuery.deleteTarea(idTarea)
+    }
+
 }

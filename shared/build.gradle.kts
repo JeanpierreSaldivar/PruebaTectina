@@ -22,6 +22,11 @@ kotlin {
             dependencies{
                 // SQL Delight
                 implementation("com.squareup.sqldelight:runtime:1.4.4")
+                //badoo
+                implementation ("com.badoo.reaktive:reaktive:1.1.20")
+                implementation ("com.badoo.reaktive:reaktive-annotations:1.1.20")
+                implementation ("com.badoo.reaktive:coroutines-interop:1.1.20")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
             }
         }
         val commonTest by getting {
@@ -35,6 +40,7 @@ kotlin {
                 implementation("com.google.android.material:material:1.2.1")
                 // SQL Delight
                 implementation("com.squareup.sqldelight:android-driver:1.4.4")
+                implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
             }
         }
         val androidTest by getting {
