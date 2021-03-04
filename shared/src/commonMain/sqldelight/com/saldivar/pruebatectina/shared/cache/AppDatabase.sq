@@ -1,17 +1,10 @@
 CREATE TABLE TAREAS (
-  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  id INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
   titulo TEXT NOT NULL,
   descripcion TEXT NOT NULL,
   creacion TEXT NOT NULL,
   finalizacion TEXT NOT NULL,
-  estado INTEGER  NOT NULL
-);
-
-CREATE TABLE COMENTARIOS(
-    idComentario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    idTarea INTEGER NOT NULL,
-    user TEXT NOT NULL,
-    comentario TEXT NOT NULL
+  estado INTEGER AS Boolean NOT NULL
 );
 
 consultarUltimaTarea:
@@ -42,6 +35,13 @@ SELECT * FROM TAREAS WHERE id = ? LIMIT 1;
 actualizarTarea:
 UPDATE TAREAS SET titulo = ?, descripcion = ?,finalizacion = ? WHERE id = ?;
 
+CREATE TABLE COMENTARIOS(
+    idComentario INTEGER AS Int NOT NULL PRIMARY KEY AUTOINCREMENT,
+    idTarea INTEGER AS Int NOT NULL,
+    user TEXT NOT NULL,
+    comentario TEXT NOT NULL
+);
+
 insertComentario:
 INSERT INTO COMENTARIOS(
     idComentario,
@@ -55,4 +55,3 @@ SELECT * FROM COMENTARIOS WHERE idTarea = ?;
 
 eliminarComentarios:
 DELETE FROM COMENTARIOS WHERE idTarea = ?;
-

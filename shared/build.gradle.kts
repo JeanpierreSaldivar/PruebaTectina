@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("com.squareup.sqldelight")
 
 }
 
@@ -20,7 +21,7 @@ kotlin {
         val commonMain by getting{
             dependencies{
                 // SQL Delight
-                implementation("com.squareup.sqldelight:runtime:1.2.0")
+                implementation("com.squareup.sqldelight:runtime:1.4.4")
             }
         }
         val commonTest by getting {
@@ -33,7 +34,7 @@ kotlin {
             dependencies {
                 implementation("com.google.android.material:material:1.2.1")
                 // SQL Delight
-                implementation("com.squareup.sqldelight:android-driver:1.2.0")
+                implementation("com.squareup.sqldelight:android-driver:1.4.4")
             }
         }
         val androidTest by getting {
@@ -44,15 +45,20 @@ kotlin {
         }
         val iosMain by getting{
             dependencies{
-                implementation("com.squareup.sqldelight:native-driver:1.2.0")
+                implementation("com.squareup.sqldelight:native-driver:1.4.4")
             }
 
         }
         val iosTest by getting
     }
 
-}
 
+}
+sqldelight {
+    database("AppDatabase") {
+        packageName = "com.saldivar.pruebatectina.shared.cache"
+    }
+}
 android {
     compileSdkVersion(29)
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -75,4 +81,8 @@ val packForXcode by tasks.creating(Sync::class) {
     into(targetDir)
 }
 
-tasks.getByName("build").dependsOn(packForXcode)
+/*tasks.getByName("build").dependsOn(packForXcode)
+dependencies {
+    implementation("androidx.room:room-runtime:2.2.5")
+    annotationProcessor("androidx.room:room-compiler:2.2.5")
+}*/
