@@ -1,4 +1,4 @@
-package com.saldivar.pruebatectina.androidApp.Home.util
+package com.saldivar.pruebatectina.androidApp.home.util
 
 import android.annotation.SuppressLint
 import android.content.Context

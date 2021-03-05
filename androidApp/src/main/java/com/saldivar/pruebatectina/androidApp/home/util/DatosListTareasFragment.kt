@@ -1,4 +1,4 @@
-package com.saldivar.pruebatectina.androidApp.Home.util
+package com.saldivar.pruebatectina.androidApp.home.util
 
 object DatosListTareasFragment {
     var estadoOjo:Boolean=false

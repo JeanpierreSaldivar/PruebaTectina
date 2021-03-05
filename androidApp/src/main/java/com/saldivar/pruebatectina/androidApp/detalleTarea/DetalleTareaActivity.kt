@@ -1,4 +1,4 @@
-package com.saldivar.pruebatectina.androidApp
+package com.saldivar.pruebatectina.androidApp.detalleTarea
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,5 +8,6 @@ class DetalleTareaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_tarea)
+        supportActionBar!!.hide()
     }
 }

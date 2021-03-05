@@ -1,4 +1,4 @@
-package com.saldivar.pruebatectina.androidApp.Home
+package com.saldivar.pruebatectina.androidApp.home.view
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -16,14 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.saldivar.pruebatecnica.helper.MyAplicationClass
-import com.saldivar.pruebatectina.androidApp.DetalleTareaActivity
+import com.saldivar.pruebatectina.androidApp.detalleTarea.DetalleTareaActivity
 import com.saldivar.pruebatectina.androidApp.R
 import com.saldivar.pruebatectina.androidApp.helper.fechaActual
 import com.saldivar.pruebatectina.androidApp.helper.hideSoftKeyBoard
 import com.saldivar.pruebatectina.androidApp.helper.toastMessage
-import com.saldivar.pruebatectina.androidApp.Home.util.DatosListTareasFragment
-import com.saldivar.pruebatectina.androidApp.Home.util.RecyclerTareasListener
-import com.saldivar.pruebatectina.androidApp.Home.util.TareasAdapter
+import com.saldivar.pruebatectina.androidApp.home.util.DatosListTareasFragment
+import com.saldivar.pruebatectina.androidApp.home.util.RecyclerTareasListener
+import com.saldivar.pruebatectina.androidApp.home.util.TareasAdapter
 import com.saldivar.pruebatectina.shared.DatabaseDriverFactory
 import com.saldivar.pruebatectina.shared.modulos.home.objeto.Tareas
 import com.saldivar.pruebatectina.shared.modulos.home.viewmodel.ViewModelTareas

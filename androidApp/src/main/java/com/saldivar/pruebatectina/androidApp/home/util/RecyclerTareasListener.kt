@@ -1,4 +1,4 @@
-package com.saldivar.pruebatectina.androidApp.Home.util
+package com.saldivar.pruebatectina.androidApp.home.util
 
 import com.saldivar.pruebatectina.shared.modulos.home.objeto.Tareas
 
