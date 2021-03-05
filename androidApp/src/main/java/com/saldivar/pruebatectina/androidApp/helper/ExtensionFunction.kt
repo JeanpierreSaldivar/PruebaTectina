@@ -31,9 +31,9 @@ fun fechaActual():String {
 }
 
 fun searchAutomatic(repetitiveTask:()->Unit, successTask:()->Unit) {
-    CoroutineScope(Dispatchers.IO).async {
+    CoroutineScope(Dispatchers.Default).async {
         while (Animation.comentarioEnProgreso.isEmpty() || Animation.comentarioEnProgreso.isBlank()) {
-            delay(1500)
+            delay(1000)
              repetitiveTask()
         }
         Animation.comentarioEnProgreso =""

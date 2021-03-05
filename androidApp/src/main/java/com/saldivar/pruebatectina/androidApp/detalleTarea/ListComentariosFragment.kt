@@ -85,10 +85,9 @@ class ListComentariosFragment : Fragment(),View.OnClickListener {
         DatosListComentariosFragment.estadoOjo= bundle.getBoolean("estadoOjo")
 
         val listaComentarios = viewModel.getAllComentarios(DatosListComentariosFragment.idTarea)
-        if(listaComentarios.isNotEmpty()){
-            usuariosNumero= listaComentarios.size
-            setRecyclerView(listaComentarios)
-        }
+        usuariosNumero= listaComentarios.size
+        setRecyclerView(listaComentarios)
+
     }
 
     override fun onClick(p0: View?) {

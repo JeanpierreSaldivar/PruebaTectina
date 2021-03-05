@@ -249,6 +249,7 @@ class ListTareasFragment : Fragment(),View.OnClickListener {
     private fun mostrarEnRecyclerAdd(ultimaTarea: Tareas) {
         if (!DatosListTareasFragment.estadoOjo){
             adapter.addItem(0,ultimaTarea)
+            recycler.scrollBy(0,-300)
         }else{
             toastMessage("tarea creada")
         }
