@@ -45,4 +45,16 @@ internal class ModelComentarios(databaseDriverFactory: DatabaseDriverFactory) {
     internal fun eliminarComentarios(idTarea: Int){
         dbQuery.eliminarComentarios(idTarea)
     }
+
+    internal fun consultarUltimoComentario(): Comentarios {
+        val comentarioQuery = dbQuery.obtenerUltimoComentario().executeAsOne()
+        val objectComentario = Comentarios()
+        objectComentario.apply {
+            idComentario = comentarioQuery.idComentario
+            idTarea = comentarioQuery.idTarea
+            user = comentarioQuery.user
+            comentario = comentarioQuery.comentario
+        }
+        return objectComentario
+    }
 }

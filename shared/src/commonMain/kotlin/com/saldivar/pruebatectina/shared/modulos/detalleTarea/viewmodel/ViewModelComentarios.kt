@@ -13,11 +13,9 @@ open class ViewModelComentarios(databaseDriverFactory: DatabaseDriverFactory) {
     }
 
     open fun enviarNuevoComentario(comentario: String,idTarea:Int){
-        if(comentario.isNotEmpty() && comentario.isNotBlank()){
-            val objectComentario = Comentarios(0, idTarea,
-                "anonimus",comentario)
-            modelComentarios.insertarComentarioDB(objectComentario)
-        }
+        val objectComentario = Comentarios(0, idTarea,
+            "anonimus",comentario)
+        modelComentarios.insertarComentarioDB(objectComentario)
     }
 
     open fun eliminarComentarios(idTarea: Int){
@@ -40,4 +38,7 @@ open class ViewModelComentarios(databaseDriverFactory: DatabaseDriverFactory) {
         return lista
     }
 
+    open fun obtenerUltimoComentario():Comentarios{
+        return modelComentarios.consultarUltimoComentario()
+    }
 }

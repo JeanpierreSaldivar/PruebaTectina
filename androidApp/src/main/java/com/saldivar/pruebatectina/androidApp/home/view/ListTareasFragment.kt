@@ -91,7 +91,7 @@ class ListTareasFragment : Fragment(),View.OnClickListener {
         }
         else{
             val lista =viewModel.ordenMostrarTareas(listTareas)
-            mostrarEnRecycler(listTareas)
+            mostrarEnRecycler(lista)
         }
     }
 

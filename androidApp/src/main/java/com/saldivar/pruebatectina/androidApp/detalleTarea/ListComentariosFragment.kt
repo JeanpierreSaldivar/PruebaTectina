@@ -6,29 +6,29 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
 import com.saldivar.pruebatecnica.helper.MyAplicationClass
 import com.saldivar.pruebatecnica.modulo.detalleTarea.util.DatosListComentariosFragment
 import com.saldivar.pruebatectina.androidApp.MainActivity
 import com.saldivar.pruebatectina.androidApp.R
+import com.saldivar.pruebatectina.androidApp.detalleTarea.util.ComentariosAdapter
 import com.saldivar.pruebatectina.androidApp.helper.fechaActual
 import com.saldivar.pruebatectina.androidApp.helper.hideSoftKeyBoard
 import com.saldivar.pruebatectina.androidApp.helper.toastMessage
 import com.saldivar.pruebatectina.shared.DatabaseDriverFactory
+import com.saldivar.pruebatectina.shared.modulos.detalleTarea.objeto.Comentarios
 import com.saldivar.pruebatectina.shared.modulos.detalleTarea.viewmodel.ViewModelComentarios
 import com.saldivar.pruebatectina.shared.modulos.home.objeto.Tareas
-import com.saldivar.pruebatectina.shared.modulos.home.viewmodel.ViewModelTareas
 import java.util.*
 
 class ListComentariosFragment : Fragment(),View.OnClickListener {
@@ -42,8 +42,10 @@ class ListComentariosFragment : Fragment(),View.OnClickListener {
     private lateinit var delete :AppCompatImageView
     private lateinit var check: ImageView
     private lateinit var edit :AppCompatImageView
+    private lateinit var adapter: ComentariosAdapter
     private val driver = DatabaseDriverFactory(MyAplicationClass.ctx!!)
     private val viewModel = ViewModelComentarios(driver)
+    private var usuariosNumero = 0
     private  var textoCreacion =""
     private  var textoFinalizacion =""
 
@@ -67,7 +69,7 @@ class ListComentariosFragment : Fragment(),View.OnClickListener {
         edit.setOnClickListener(this)
         val bundle = activity!!.intent.extras
         mostrarDatos(bundle)
-        viewModel.getAllComentarios(DatosListComentariosFragment.idTarea)
+
         return rootview
     }
 
@@ -81,16 +83,27 @@ class ListComentariosFragment : Fragment(),View.OnClickListener {
         textDescripcionDetalle.text= bundle.getString("tareaDetalle")
         DatosListComentariosFragment.positionTarea = bundle.getInt("position")
         DatosListComentariosFragment.estadoOjo= bundle.getBoolean("estadoOjo")
+
+        val listaComentarios = viewModel.getAllComentarios(DatosListComentariosFragment.idTarea)
+        if(listaComentarios.isNotEmpty()){
+            usuariosNumero= listaComentarios.size
+            setRecyclerView(listaComentarios)
+        }
     }
 
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.check->{
                 val dato = etNewComentario.text.toString()
-                viewModel.enviarNuevoComentario(dato,DatosListComentariosFragment.idTarea)
                 etNewComentario.setText("")
                 etNewComentario.clearFocus()
                 hideSoftKeyBoard(MyAplicationClass.ctx!!, etNewComentario)
+                if(dato.isNotEmpty() || dato.isNotBlank()){
+                viewModel.enviarNuevoComentario(dato,DatosListComentariosFragment.idTarea)
+                val ultimocomentario= viewModel.obtenerUltimoComentario()
+                recyclerViewNuevoComentario(ultimocomentario)
+                }
+
             }
             R.id.edit->{
                 showDialog()
@@ -263,7 +276,26 @@ class ListComentariosFragment : Fragment(),View.OnClickListener {
         textDescripcionDetalle.text  = tareaActualizada.descripcion
     }
 
+    private fun setRecyclerView(datosComentario: MutableList<Comentarios>) {
+        textNumeroComentarios.text=("Comentarios (${usuariosNumero})")
+        recycler.setHasFixedSize(true)
+        recycler.itemAnimator = DefaultItemAnimator()
+        recycler.layoutManager = LinearLayoutManager(MyAplicationClass.ctx)
+        adapter =(ComentariosAdapter(MyAplicationClass.ctx!!))
+        recycler.adapter = adapter
+        adapter.setDataList(datosComentario)
+        adapter.notifyDataSetChanged()
+    }
 
+    private fun recyclerViewNuevoComentario(ultimocomentario: Comentarios) {
+        val numeroComentarios = textNumeroComentarios.text.toString()
+         numeroComentarios.split("(")
+        usuariosNumero += 1
+        textNumeroComentarios.text = "Comentarios (${usuariosNumero})"
+        adapter.addItem(0,ultimocomentario)
+        recycler.scrollBy(0,-150)
+
+    }
     companion object {
         fun newInstance(): ListComentariosFragment = ListComentariosFragment()
     }

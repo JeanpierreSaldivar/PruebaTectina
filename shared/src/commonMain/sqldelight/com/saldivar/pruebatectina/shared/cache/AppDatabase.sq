@@ -53,3 +53,6 @@ SELECT * FROM COMENTARIOS WHERE idTarea = ?;
 
 eliminarComentarios:
 DELETE FROM COMENTARIOS WHERE idTarea = ?;
+
+obtenerUltimoComentario:
+SELECT * FROM COMENTARIOS WHERE idComentario = (SELECT MAX(idComentario) FROM COMENTARIOS) LIMIT 1;
