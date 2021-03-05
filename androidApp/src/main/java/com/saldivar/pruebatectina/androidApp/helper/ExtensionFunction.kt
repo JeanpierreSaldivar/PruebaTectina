@@ -6,7 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.saldivar.pruebatecnica.helper.Animation
 import com.saldivar.pruebatecnica.helper.MyAplicationClass
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,7 +30,7 @@ fun fechaActual():String {
     return "${partes[0]}/${partes[1]}"
 }
 
-/*fun searchAutomatic(repetitiveTask:()->Unit, successTask:()->Unit) {
+fun searchAutomatic(repetitiveTask:()->Unit, successTask:()->Unit) {
     CoroutineScope(Dispatchers.IO).async {
         while (Animation.comentarioEnProgreso.isEmpty() || Animation.comentarioEnProgreso.isBlank()) {
             delay(1500)
@@ -34,7 +39,7 @@ fun fechaActual():String {
         Animation.comentarioEnProgreso =""
         successTask()
     }
-}*/
+}
 
 fun hideSoftKeyBoard(context: Context, view: View) {
     try {

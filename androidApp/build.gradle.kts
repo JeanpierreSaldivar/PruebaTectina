@@ -12,6 +12,12 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.0.2")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    //Imagen circular
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    //corutinas
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.3.3")
 }
 
 android {
