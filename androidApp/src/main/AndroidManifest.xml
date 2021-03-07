@@ -7,8 +7,10 @@
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".detalleTarea.DetalleTareaActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".detalleTarea.DetalleTareaActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

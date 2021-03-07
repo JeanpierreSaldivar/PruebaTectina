@@ -224,7 +224,6 @@ class ListComentariosFragment : Fragment(),View.OnClickListener {
                     mAlertDialog.dismiss()
                 }
             }
-            mAlertDialog.dismiss()
         }
         cancelar.setOnClickListener { mAlertDialog.dismiss() }
     }
